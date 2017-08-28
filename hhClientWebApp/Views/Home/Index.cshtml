@@ -1,0 +1,10 @@
+﻿@model Data
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@foreach(var item in Model.Vacancies)
+{
+    <div><a href="@item.alternate_url">@item.name</a></div>
+}
