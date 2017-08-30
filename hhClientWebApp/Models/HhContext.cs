@@ -5,15 +5,16 @@ namespace hhClientWebApp.Models
 {
 	public class HhContext : DbContext
 	{
-		public HhContext(DbContextOptions<HhContext> options)
-			: base(options)
-		{ 
-            Database.EnsureCreated();
-        }
-
 		public DbSet<Salary> Salaries { get; set; }
 
 		public DbSet<Vacancy> Vacancies { get; set; }
+
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		{
+			string connection = "User ID=gima;Password=;Host=localhost;Port=5432;Database=hhData2";
+			optionsBuilder.UseNpgsql(connection);
+            Database.EnsureCreated();
+		}
 
 	}
 

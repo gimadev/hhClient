@@ -4,7 +4,25 @@
     ViewData["Title"] = "Home Page";
 }
 
-@foreach(var item in Model.Vacancies)
-{
-    <div><a href="@item.alternate_url">@item.name</a></div>
+<div id="list-content"></div>
+
+@section Scripts {
+
+<script id="itemTmpl" type="text/x-jquery-tmpl">
+    <div class="movie-bag">
+        <div class="base-info">
+            <h2>
+                ${name}
+            </h2>
+            <p>
+                Ссылка: ${alternate_url}<br />
+            </p>
+        </div>
+    </div>
+</script>
+
+<script type="text/javascript" src="/js/jquery.tmpl.min.js"></script>
+<script type="text/javascript" src="/js/site.js"></script>
+
 }
+

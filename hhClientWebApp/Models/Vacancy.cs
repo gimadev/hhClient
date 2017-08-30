@@ -7,6 +7,8 @@ namespace hhClientWebApp.Models
     [DataContract]
     public class Vacancy
     {
+        public Vacancy(){}
+
         [DataMember(Name = "id")]
         public int id { get; set; }
 
@@ -18,6 +20,10 @@ namespace hhClientWebApp.Models
 
         [DataMember(Name = "salary")]
         public Salary salary { get; set; }
+
+
+		[DataMember(Name = "description")]
+        public string description { get; set; }
 
     }
 }

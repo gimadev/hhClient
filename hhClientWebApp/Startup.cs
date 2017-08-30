@@ -31,11 +31,13 @@ namespace hhClientWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-			string connection = Configuration.GetConnectionString("default");
+            /*
+            string connection = "User ID=gima;Password=;Host=localhost;Port=5432;Database=hhData2"; //Configuration.GetConnectionString("default");
             var optionsBuilder = new DbContextOptionsBuilder<HhContext>();
 			// добавление контекста данных
-            services.AddDbContext<HhContext>(options =>
-				options.UseNpgsql(connection));
+            services.AddDbContext<HhContext>(options => optionsBuilder.UseNpgsql(connection));
+            */
+
             services.AddMvc();
 
 

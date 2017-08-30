@@ -13,18 +13,21 @@ namespace hhClientWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private Data data;
+
+        Data data;
+        string jsonString;
 
         public IActionResult Index()
         {
-            SetData().Wait();
-            return View(data);
+            using(var context = new HhContext()){
+                
+            }
+            return View();
         }
 
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
-
             return View();
         }
 
@@ -40,9 +43,20 @@ namespace hhClientWebApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+		public IActionResult List()
+		{
+            SetData().Wait();
+            return Json(data);
+		}
+
         private async Task SetData(){
             data = await GetDataAsync();
         }
+
+		private async Task SetJson()
+		{
+            jsonString = await GetDataHh();
+		}
 
         private async Task<Data> GetDataAsync(){
             var serializer = new DataContractJsonSerializer(typeof(Data));
@@ -51,6 +65,13 @@ namespace hhClientWebApp.Controllers
 			client.DefaultRequestHeaders.Add("User-Agent", "HH-User-Agent");
             var streamTask = client.GetStreamAsync("https://api.hh.ru/vacancies?page=0&per_page=50");
             return serializer.ReadObject(await streamTask) as Data;
+        }
+
+        private async Task<string> GetDataHh(){
+			var client = new HttpClient();
+			client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Add("User-Agent", "HH-User-Agent");
+            return await client.GetStringAsync("https://api.hh.ru/vacancies?page=0&per_page=50");
         }
 
     }

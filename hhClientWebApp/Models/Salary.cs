@@ -6,6 +6,13 @@ namespace hhClientWebApp.Models
 	[DataContract]
 	public class Salary
 	{
+        public Salary(){}
+
+        public int id {
+            get{
+                return this.GetHashCode();
+            }
+        }
 
 		[DataMember(Name = "currency")]
 		public string currency { get; set; }
