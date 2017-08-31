@@ -19,7 +19,10 @@ namespace hhClientWebApp.Controllers
 
         public IActionResult Index()
         {
-            
+            using (var context = new HhContext())
+            {
+                context.Database.EnsureCreated();
+            }
             return View();
         }
 

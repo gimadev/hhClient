@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Microsoft.EntityFrameworkCore;
 
 namespace hhClientWebApp.Models
 {
 	[DataContract]
-	public class Salary
+    public class Salary
 	{
         public Salary(){}
 
-        public int id {
-            get{
-                return this.GetHashCode();
-            }
-        }
+        public int id { get; set; }
 
 		[DataMember(Name = "currency")]
 		public string currency { get; set; }

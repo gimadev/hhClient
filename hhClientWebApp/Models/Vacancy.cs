@@ -7,8 +7,6 @@ namespace hhClientWebApp.Models
     [DataContract]
     public class Vacancy
     {
-        public Vacancy(){}
-
         [DataMember(Name = "id")]
         public int id { get; set; }
 

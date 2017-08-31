@@ -1,6 +1,4 @@
-﻿// Write your JavaScript code.
-
-//alert('ok')
+﻿
 
 $.ajax({
     type: "get",

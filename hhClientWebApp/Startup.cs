@@ -32,18 +32,13 @@ namespace hhClientWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             /*
-            string connection = "User ID=gima;Password=;Host=localhost;Port=5432;Database=hhData2"; //Configuration.GetConnectionString("default");
+            string connection = "User ID=gima;Password=xREzFBhd55;Host=hhdemo.database.windows.net;Database=hhLocal"; //Configuration.GetConnectionString("default");
             var optionsBuilder = new DbContextOptionsBuilder<HhContext>();
 			// добавление контекста данных
-            services.AddDbContext<HhContext>(options => optionsBuilder.UseNpgsql(connection));
+            services.AddDbContext<HhContext>(options => optionsBuilder.UseSqlServer(connection));
             */
 
             services.AddMvc();
-
-
-
-			//services.AddDbContext<ApplicationDbContext>(options =>
-		//options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
