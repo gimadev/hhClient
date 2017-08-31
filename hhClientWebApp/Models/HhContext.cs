@@ -9,12 +9,7 @@ namespace hhClientWebApp.Models
 
 		public DbSet<Vacancy> Vacancies { get; set; }
 
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-		{
-			string connection = "User ID=gima;Password=;Host=localhost;Port=5432;Database=hhData2";
-			optionsBuilder.UseNpgsql(connection);
-            Database.EnsureCreated();
-		}
+		
 
 	}
 

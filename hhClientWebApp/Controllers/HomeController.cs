@@ -19,9 +19,7 @@ namespace hhClientWebApp.Controllers
 
         public IActionResult Index()
         {
-            using(var context = new HhContext()){
-                
-            }
+            
             return View();
         }
 
