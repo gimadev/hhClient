@@ -8,6 +8,7 @@ using hhClientWebApp.Models;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.Serialization.Json;
+using Microsoft.EntityFrameworkCore;
 
 namespace hhClientWebApp.Controllers
 {
@@ -21,7 +22,7 @@ namespace hhClientWebApp.Controllers
         {
             using (var context = new HhContext())
             {
-                context.Database.EnsureCreated();
+                bool res = context.Database.EnsureCreated();
             }
             return View();
         }
@@ -47,8 +48,39 @@ namespace hhClientWebApp.Controllers
 		public IActionResult List()
 		{
             SetData().Wait();
+
+            using (var context = new HhContext())
+            {
+                context.Database.EnsureCreated();
+                
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    
+                    var vacancy = context.Set<Vacancy>();
+                    context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Vacancies] ON");
+                    vacancy.AddRange(data.Vacancies);
+                    context.SaveChanges();
+                    context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Vacancies] OFF");
+
+                    transaction.Commit();
+                }
+
+            }
+
             return Json(data);
 		}
+
+        /*
+        private async Task<int> WriteData(Data data)
+        {
+
+        }
+
+        private async Task<int> WriteRow(Vacancy vacancy)
+        {
+
+        }
+        */
 
         private async Task SetData(){
             data = await GetDataAsync();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
-
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace hhClientWebApp.Models
 {
@@ -8,6 +9,7 @@ namespace hhClientWebApp.Models
     public class Vacancy
     {
         [DataMember(Name = "id")]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id { get; set; }
 
         [DataMember(Name = "name")]
