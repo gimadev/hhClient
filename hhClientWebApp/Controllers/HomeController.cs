@@ -48,14 +48,20 @@ namespace hhClientWebApp.Controllers
 		public IActionResult List()
 		{
             SetData().Wait();
+            WriteData();
+            return Json(data);
+		}
 
+        
+        private void WriteData()
+        {
             using (var context = new HhContext())
             {
                 context.Database.EnsureCreated();
-                
+
                 using (var transaction = context.Database.BeginTransaction())
                 {
-                    
+
                     var vacancy = context.Set<Vacancy>();
                     context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Vacancies] ON");
                     vacancy.AddRange(data.Vacancies);
@@ -66,21 +72,7 @@ namespace hhClientWebApp.Controllers
                 }
 
             }
-
-            return Json(data);
-		}
-
-        /*
-        private async Task<int> WriteData(Data data)
-        {
-
         }
-
-        private async Task<int> WriteRow(Vacancy vacancy)
-        {
-
-        }
-        */
 
         private async Task SetData(){
             data = await GetDataAsync();
